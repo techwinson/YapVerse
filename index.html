@@ -631,83 +631,82 @@
             <h1 id="agent-heading">AI Agent</h1>
             <p style="text-align: center;">Interact with our AI agent for quick answers and assistance.</p>
             <div id="container" style="max-width:500px;margin:2rem auto;padding:2rem;background:var(--card-bg);border-radius:12px;box-shadow:var(--shadow-light);">
-            <div id="controls" style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;">
-            <button class="toggle" type="button" onclick="toggleDarkMode()">🌙 Toggle Dark Mode</button>
-            <button class="toggle" type="button" onclick="startVoiceInput()">🎙 Speak</button>
-            </div>
-            <h2 style="text-align:center;">VirtualYap AI</h2>
-            <form id="ask-form" style="display:flex;flex-direction:column;gap:1rem;">
-            <textarea id="question" placeholder="Ask as VirtualYap persona..." required autofocus style="padding:0.7rem;border-radius:6px;border:1px solid #cbd5e1;font-size:1rem;resize:vertical;"></textarea>
-            <button type="submit" class="btn">Ask Me</button>
-            </form>
-            <div id="response" style="margin-top:1rem;text-align:center;font-weight:500;">Waiting for your question...</div>
-            <div style="margin-top:20px;text-align:center;">
-            <button class="toggle" type="button" onclick="saveChat()">💾 Save Chat</button>
-            </div>
+                <div id="controls" style="display:flex;justify-content:center;gap:1rem;margin-bottom:1rem;">
+                    <button class="toggle" type="button" onclick="startVoiceInput()">🎙 Speak</button>
+                </div>
+                <h2 style="text-align:center;">VirtualYap AI</h2>
+                <form id="ask-form" style="display:flex;flex-direction:column;gap:1rem;">
+                    <textarea id="question" placeholder="Ask as VirtualYap persona..." required autofocus style="padding:0.7rem;border-radius:6px;border:1px solid #cbd5e1;font-size:1rem;resize:vertical;"></textarea>
+                    <button type="submit" class="btn">Ask Me</button>
+                </form>
+                <div id="response" style="margin-top:1rem;text-align:center;font-weight:500;">Waiting for your question...</div>
+                <div style="margin-top:20px;text-align:center;">
+                    <button class="toggle" type="button" onclick="saveChat()">💾 Save Chat</button>
+                </div>
             </div>
             <style>
             body.dark {
-            --primary-color: #60a5fa;
-            --primary-light: #93c5fd;
-            --primary-dark: #2563eb;
-            --background-light: #181a20;
-            --text-dark: #f1f5f9;
-            --text-medium: #cbd5e1;
-            --text-light: #94a3b8;
-            --card-bg: #23263a;
-            --shadow-light: 0 2px 8px rgba(37, 99, 235, 0.18);
-            --shadow-medium: 0 4px 12px rgba(37, 99, 235, 0.22);
+                --primary-color: #60a5fa;
+                --primary-light: #93c5fd;
+                --primary-dark: #2563eb;
+                --background-light: #181a20;
+                --text-dark: #f1f5f9;
+                --text-medium: #cbd5e1;
+                --text-light: #94a3b8;
+                --card-bg: #23263a;
+                --shadow-light: 0 2px 8px rgba(37, 99, 235, 0.18);
+                --shadow-medium: 0 4px 12px rgba(37, 99, 235, 0.22);
             }
             body.dark nav,
             body.dark footer {
-            background: linear-gradient(90deg, var(--primary-color) 60%, var(--primary-dark) 100%) !important;
-            color: #fff !important;
+                background: linear-gradient(90deg, var(--primary-color) 60%, var(--primary-dark) 100%) !important;
+                color: #fff !important;
             }
             body.dark .btn,
             body.dark .toggle {
-            background: var(--primary-dark) !important;
-            color: #fff !important;
+                background: var(--primary-dark) !important;
+                color: #fff !important;
             }
             body.dark .btn:hover,
             body.dark .toggle:hover {
-            background: var(--primary-color) !important;
+                background: var(--primary-color) !important;
             }
             body.dark input,
             body.dark textarea {
-            background: #23263a !important;
-            color: #f1f5f9 !important;
-            border: 1px solid #334155 !important;
+                background: #23263a !important;
+                color: #f1f5f9 !important;
+                border: 1px solid #334155 !important;
             }
             body.dark #container {
-            background: var(--card-bg) !important;
-            color: var(--text-dark) !important;
+                background: var(--card-bg) !important;
+                color: var(--text-dark) !important;
             }
             body.dark .feature-card,
             body.dark .service-item,
             body.dark .contact-info,
             body.dark .contact-form-container {
-            background: #23263a !important;
-            color: #f1f5f9 !important;
-            box-shadow: var(--shadow-light) !important;
+                background: #23263a !important;
+                color: #f1f5f9 !important;
+                box-shadow: var(--shadow-light) !important;
             }
             body.dark .nav-links a {
-            color: #fff !important;
+                color: #fff !important;
             }
             body.dark .nav-links a[aria-current="page"] {
-            background: rgba(255,255,255,0.12) !important;
+                background: rgba(255,255,255,0.12) !important;
             }
             body.dark .nav-links a:hover,
             body.dark .nav-links a:focus {
-            background: rgba(255,255,255,0.08) !important;
+                background: rgba(255,255,255,0.08) !important;
             }
             body.dark h1, body.dark h2, body.dark h3 {
-            color: var(--primary-light) !important;
+                color: var(--primary-light) !important;
             }
             body.dark p, body.dark label, body.dark span, body.dark li {
-            color: var(--text-medium) !important;
+                color: var(--text-medium) !important;
             }
             body.dark #response {
-            color: var(--text-dark) !important;
+                color: var(--text-dark) !important;
             }
             </style>
             <script>
@@ -716,93 +715,107 @@
             const questionInput = document.getElementById('question');
             let chatLog = [];
 
-            function toggleDarkMode() {
-            document.body.classList.toggle('dark');
-            // Save preference
-            if (document.body.classList.contains('dark')) {
-                localStorage.setItem('yapverse-dark', '1');
-            } else {
-                localStorage.removeItem('yapverse-dark');
-            }
-            }
-
-            // On load, apply dark mode if preferred
-            if (localStorage.getItem('yapverse-dark') === '1') {
-            document.body.classList.add('dark');
-            }
-
             function startVoiceInput() {
-            if (!('webkitSpeechRecognition' in window)) {
-            alert("Speech Recognition not supported");
-            return;
-            }
-            const recognition = new webkitSpeechRecognition();
-            recognition.lang = "en-US";
-            recognition.start();
-            recognition.onresult = (event) => {
-            const transcript = event.results[0][0].transcript;
-            questionInput.value = transcript;
-            };
+                if (!('webkitSpeechRecognition' in window)) {
+                    alert("Speech Recognition not supported");
+                    return;
+                }
+                const recognition = new webkitSpeechRecognition();
+                recognition.lang = "en-US";
+                recognition.start();
+                recognition.onresult = (event) => {
+                    const transcript = event.results[0][0].transcript;
+                    questionInput.value = transcript;
+                };
             }
 
             function saveChat() {
-            const blob = new Blob([chatLog.join('\n\n')], { type: 'text/plain' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'chat_log.txt';
-            a.click();
+                const blob = new Blob([chatLog.join('\n\n')], { type: 'text/plain' });
+                const a = document.createElement('a');
+                a.href = URL.createObjectURL(blob);
+                a.download = 'chat_log.txt';
+                a.click();
             }
 
             form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const question = questionInput.value.trim();
-            if (!question) return;
+                e.preventDefault();
+                const question = questionInput.value.trim();
+                if (!question) return;
 
-            const personaPrompt = "You are a character named VirtualYap, a friendly and playful AI assistant. Respond in a fun and conversational way.";
-            const fullPrompt = `${personaPrompt}\n\nUser: ${question}`;
+                const personaPrompt = "You are a character named VirtualYap, a friendly and playful AI assistant. Respond in a fun and conversational way.";
+                const fullPrompt = `${personaPrompt}\n\nUser: ${question}`;
 
-            responseDiv.textContent = "🧠 Thinking... Please wait.";
-            questionInput.disabled = true;
+                responseDiv.textContent = "🧠 Thinking... Please wait.";
+                questionInput.disabled = true;
 
-            const apiKey = "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";
+                const apiKey = "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";
 
-            try {
-            const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-                method: 'POST',
-                headers: {
-                'Authorization': `Bearer ${apiKey}`,
-                'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
-                messages: [
-                { role: "system", content: personaPrompt },
-                { role: "user", content: question }
-                ]
-                })
-            });
+                try {
+                    const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${apiKey}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            model: "deepseek/deepseek-r1-0528-qwen3-8b:free",
+                            messages: [
+                                { role: "system", content: personaPrompt },
+                                { role: "user", content: question }
+                            ]
+                        })
+                    });
 
-            if (!res.ok) {
-                const errText = await res.text();
-                throw new Error(`API error: ${res.status} ${errText}`);
-            }
+                    if (!res.ok) {
+                        const errText = await res.text();
+                        throw new Error(`API error: ${res.status} ${errText}`);
+                    }
 
-            const data = await res.json();
-            const answer = data.choices?.[0]?.message?.content || "No response from AI.";
-            responseDiv.textContent = answer;
-            chatLog.push("You: " + question);
-            chatLog.push("AI: " + answer);
+                    const data = await res.json();
+                    const answer = data.choices?.[0]?.message?.content || "No response from AI.";
+                    responseDiv.textContent = answer;
+                    chatLog.push("You: " + question);
+                    chatLog.push("AI: " + answer);
 
-            } catch (err) {
-            responseDiv.textContent = "❌ Error: " + err.message;
-            } finally {
-            questionInput.disabled = false;
-            questionInput.value = "";
-            questionInput.focus();
-            }
+                } catch (err) {
+                    responseDiv.textContent = "❌ Error: " + err.message;
+                } finally {
+                    questionInput.disabled = false;
+                    questionInput.value = "";
+                    questionInput.focus();
+                }
             });
             </script>
         </section>
+        <script>
+        // Move dark mode toggle to nav bar
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create dark mode button
+            const darkBtn = document.createElement('button');
+            darkBtn.className = 'toggle';
+            darkBtn.type = 'button';
+            darkBtn.innerHTML = '🌙 Toggle Dark Mode';
+            darkBtn.style.marginLeft = '1rem';
+            darkBtn.onclick = function() {
+                document.body.classList.toggle('dark');
+                if (document.body.classList.contains('dark')) {
+                    localStorage.setItem('yapverse-dark', '1');
+                } else {
+                    localStorage.removeItem('yapverse-dark');
+                }
+            };
+
+            // Insert into nav (right after nav-links)
+            const nav = document.querySelector('nav');
+            const navLinks = nav.querySelector('.nav-links');
+            nav.insertBefore(darkBtn, navLinks.nextSibling);
+
+            // On load, apply dark mode if preferred
+            if (localStorage.getItem('yapverse-dark') === '1') {
+                document.body.classList.add('dark');
+            }
+        });
+        </script>
     </main>
     
     <footer>
