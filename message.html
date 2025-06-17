@@ -89,10 +89,9 @@
             messages.forEach(msg => {
                 const li = document.createElement('li');
                 li.className = 'message';
-                li.innerHTML = `
-                    ${msg.text}
-                    <span class="timestamp">${msg.time}</span>
-                `;
+                li.innerHTML = 
+                    msg.text +
+                    '<span class="timestamp">' + msg.time + '</span>';
                 list.appendChild(li);
             });
         }
