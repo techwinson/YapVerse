@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Social Message Board</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background: #0078d7;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #005fa3;
+        }
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .message {
+            background: #f0f8ff;
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 6px;
+            border-left: 4px solid #0078d7;
+            word-break: break-word;
+        }
+        .timestamp {
+            font-size: 0.85em;
+            color: #888;
+            margin-top: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Leave your thoughts</h1>
+        <form id="messageForm">
+            <input type="text" id="messageInput" placeholder="Leave a message..." maxlength="200" required>
+            <button type="submit">Post</button>
+        </form>
+        <ul class="messages" id="messagesList"></ul>
+    </div>
+    <script>
+        // Use localStorage to persist messages
+        function getMessages() {
+            return JSON.parse(localStorage.getItem('messages') || '[]');
+        }
+        function saveMessages(messages) {
+            localStorage.setItem('messages', JSON.stringify(messages));
+        }
+        function renderMessages() {
+            const messages = getMessages();
+            const list = document.getElementById('messagesList');
+            list.innerHTML = '';
+            messages.forEach(msg => {
+                const li = document.createElement('li');
+                li.className = 'message';
+                li.innerHTML = `
+                    ${msg.text}
+                    <span class="timestamp">${msg.time}</span>
+                `;
+                list.appendChild(li);
+            });
+        }
+        document.getElementById('messageForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+            if (text) {
+                const messages = getMessages();
+                messages.unshift({
+                    text,
+                    time: new Date().toLocaleString()
+                });
+                saveMessages(messages);
+                renderMessages();
+                input.value = '';
+            }
+        });
+        // Initial render
+        renderMessages();
+    </script>
+    <noscript>
+        <div style="color: red; text-align: center;">Please enable JavaScript to use the message board.</div>
+    </noscript>
+    <div style="text-align: center; margin-top: 24px;">
+        <a href="index.html" style="color: #0078d7; text-decoration: none; font-weight: bold;">
+            &larr; Back to Home Page
+        </a>
+    </div>
+
+</body>
+</html>
