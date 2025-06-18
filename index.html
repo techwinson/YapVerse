@@ -375,49 +375,97 @@
     </style>
 </head>
 <body>
-    <nav aria-label="Main navigation" role="navigation">
-        <a href="#home" class="nav-logo" aria-label="YapVerse Home">
-            <img src="img/Y__1_-removebg-preview.png" alt="YapVerse Logo" style="height: 4rem; vertical-align: middle; margin-right: 0.5rem;">
-            <span style="font-family: 'Poppins', 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: 1.5px; color: #fff; display: inline-block; vertical-align: middle;">
-            YapVerse
+    <nav aria-label="Main navigation" role="navigation" style="position: relative; overflow: visible;">
+        <a href="#home" class="nav-logo" aria-label="YapVerse Home" style="display: flex; align-items: center; gap: 0.5rem;">
+            <img src="img/Y__1_-removebg-preview.png" alt="YapVerse Logo" style="height: 4rem; vertical-align: middle; margin-right: 0.5rem; animation: logoPop 1.2s cubic-bezier(.68,-0.55,.27,1.55);">
+            <span style="font-family: 'Poppins', 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; letter-spacing: 1.5px; color: #fff; display: inline-block; vertical-align: middle; animation: fadeInRight 1s 0.2s both;">
+                YapVerse
             </span>
-            <span style="font-size: 1rem; font-family: 'Inter', sans-serif; color: #e0e7ff; font-weight: 400; margin-left: 0.5rem; vertical-align: middle;">
-                 Know ★ Predict ★ Control
+            <span style="font-size: 1rem; font-family: 'Inter', sans-serif; color: #e0e7ff; font-weight: 400; margin-left: 0.5rem; vertical-align: middle; animation: fadeInRight 1s 0.5s both;">
+                Know ★ Predict ★ Control
             </span>
         </a>
-        </a>
-        <ul class="nav-links">
+        <ul class="nav-links" style="position: relative;">
+            <span id="nav-underline" style="position: absolute; left: 0; bottom: 0; height: 3px; width: 0; background: linear-gradient(90deg, #fff, #3b82f6); border-radius: 2px; transition: all 0.35s cubic-bezier(.68,-0.55,.27,1.55); pointer-events: none;"></span>
             <li>
-                <a href="#home" aria-label="Home page" tabindex="0">
-                    Home
-                </a>
+                <a href="#home" aria-label="Home page" tabindex="0" style="animation: fadeInDown 0.7s 0.1s both;">Home</a>
             </li>
             <li>
-                <a href="#services" aria-label="View our services" tabindex="0">
-                    Services
-                </a>
+                <a href="#services" aria-label="View our services" tabindex="0" style="animation: fadeInDown 0.7s 0.2s both;">Services</a>
             </li>
             <li>
-                <a href="#about" aria-label="About us" tabindex="0">
-                    About
-                </a>
+                <a href="#about" aria-label="About us" tabindex="0" style="animation: fadeInDown 0.7s 0.3s both;">About</a>
             </li>
             <li>
-                <a href="#goal" aria-label="Our Goal" tabindex="0">
-                    Our Goal
-                </a>
+                <a href="#goal" aria-label="Our Goal" tabindex="0" style="animation: fadeInDown 0.7s 0.4s both;">Our Goal</a>
             </li>
             <li>
-                <a href="#contact" aria-label="Contact us" tabindex="0">
-                    Contact
-                </a>
+                <a href="#contact" aria-label="Contact us" tabindex="0" style="animation: fadeInDown 0.7s 0.5s both;">Contact</a>
             </li>
             <li>
-                <a href="#agent" aria-label="Agent" tabindex="0">
-                    AI Agent
-                </a>
+                <a href="#agent" aria-label="Agent" tabindex="0" style="animation: fadeInDown 0.7s 0.6s both;">AI Agent</a>
             </li>
         </ul>
+        <style>
+            @keyframes logoPop {
+                0% { transform: scale(0.7) rotate(-10deg); opacity: 0; }
+                60% { transform: scale(1.15) rotate(5deg); opacity: 1; }
+                100% { transform: scale(1) rotate(0); opacity: 1; }
+            }
+            @keyframes fadeInRight {
+                0% { opacity: 0; transform: translateX(-30px);}
+                100% { opacity: 1; transform: translateX(0);}
+            }
+            @keyframes fadeInDown {
+                0% { opacity: 0; transform: translateY(-20px);}
+                100% { opacity: 1; transform: translateY(0);}
+            }
+            .nav-links li {
+                position: relative;
+            }
+            .nav-links a {
+                position: relative;
+                z-index: 1;
+                overflow: visible;
+            }
+            .nav-links a:focus-visible {
+                outline: 2px solid #fff;
+                outline-offset: 2px;
+            }
+        </style>
+        <script>
+            // Animated underline for nav links
+            document.addEventListener('DOMContentLoaded', function() {
+                const navLinks = document.querySelectorAll('.nav-links a');
+                const underline = document.getElementById('nav-underline');
+                function moveUnderline(el) {
+                    const parent = el.parentElement.parentElement;
+                    const rect = el.getBoundingClientRect();
+                    const parentRect = parent.getBoundingClientRect();
+                    underline.style.width = rect.width + 'px';
+                    underline.style.left = (rect.left - parentRect.left) + 'px';
+                    underline.style.background = 'linear-gradient(90deg, #fff, #3b82f6)';
+                    underline.style.opacity = 1;
+                }
+                function resetUnderline() {
+                    underline.style.width = '0';
+                    underline.style.opacity = 0;
+                }
+                navLinks.forEach(link => {
+                    link.addEventListener('mouseenter', function() {
+                        moveUnderline(this);
+                    });
+                    link.addEventListener('focus', function() {
+                        moveUnderline(this);
+                    });
+                    link.addEventListener('mouseleave', resetUnderline);
+                    link.addEventListener('blur', resetUnderline);
+                });
+                // Show underline under current page on load
+                const current = document.querySelector('.nav-links a[aria-current="page"]');
+                if (current) moveUnderline(current);
+            });
+        </script>
     </nav>
     
     <main>
@@ -820,13 +868,13 @@
     
     <footer>
         <div class="social-links">
-            <a href="#" aria-label="Facebook">
+            <a href="" aria-label="Facebook">
             <span aria-hidden="true">
                 <img src="https://logopng.com.br/logos/facebook-13.png" alt="" style="width: 1.4rem; height: 1.4rem; vertical-align: middle;">
             </span></a>
-            <a href="#" aria-label="Twitter"><span aria-hidden="true"><img src="https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-2-1.png" alt="" style="width: 1.4rem; height: 1.4rem; vertical-align: middle;">
+            <a href="" aria-label="Twitter"><span aria-hidden="true"><img src="https://logodownload.org/wp-content/uploads/2014/09/twitter-logo-2-1.png" alt="" style="width: 1.4rem; height: 1.4rem; vertical-align: middle;">
             </span></a>
-            <a href="http://www.instagram.com/winsonaravinthraj/" aria-label="Instagram"><span aria-hidden="true"><img src="https://th.bing.com/th/id/R.03f40b67b63d9c1c1a5a792109bbc699?rik=8HhXk%2b5PP7XurQ&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG10.png&ehk=%2f7%2ftghrL31GFpelB7DZvprao8IZHRvmhi0BpDsEAZgI%3d&risl=&pid=ImgRaw&r=0" alt="" style="width: 1.4rem; height: 1.4rem; vertical-align: middle;">
+            <a href="http://www.instagram.com/yapxverse/" aria-label="Instagram"><span aria-hidden="true"><img src="https://th.bing.com/th/id/R.03f40b67b63d9c1c1a5a792109bbc699?rik=8HhXk%2b5PP7XurQ&riu=http%3a%2f%2fpngimg.com%2fuploads%2finstagram%2finstagram_PNG10.png&ehk=%2f7%2ftghrL31GFpelB7DZvprao8IZHRvmhi0BpDsEAZgI%3d&risl=&pid=ImgRaw&r=0" alt="" style="width: 1.4rem; height: 1.4rem; vertical-align: middle;">
             </span></a>
             <a href="https://www.linkedin.com/in/winsonaravinthraj/" aria-label="LinkedIn"><span aria-hidden="true"><img src="https://pngimg.com/uploads/linkedIn/linkedIn_PNG8.png" alt="" style="width: 1.4rem; height: 1.4rem; vertical-align: middle;">
             </span></a>
